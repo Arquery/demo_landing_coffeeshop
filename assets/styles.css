@@ -1,0 +1,20 @@
+body {
+    background-color: #FFF7E4;
+    color: #302820;
+    font-family: 'DM Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+.serif-display {
+    font-family: 'DM Serif Display', Georgia, serif;
+}
+.mint-pill {
+    background-color: #B8EECB;
+    color: #1f3d2a;
+}
+.warm-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.warm-card:hover {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 16px 32px -8px rgba(48, 40, 32, 0.08);
+}

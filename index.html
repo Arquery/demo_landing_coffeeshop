@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bruma Coffee | Thoughtfully Brewed Specialty Coffee</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&amp;family=DM+Serif+Display:ital@0;1&amp;display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="assets/styles.css">
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            cream: '#FFF7E4',
+                            'cream-soft': '#F7EBD8',
+                            'cream-surface': '#FFFDF9',
+                            espresso: '#302820',
+                            terracorta: '#B78064',
+                            mint: '#B8EECB',
+                            'warm-outline': '#DCCBB7',
+                            'warm-border': 'rbga(220,203,183,0.7)'
+                        },
+                        fontFamily: {
+                            serif: ['"DM Serif Display"', 'Georgia', 'serif'],
+                            sans: ['"DM Sans"', 'system-ui', 'sans-serif']
+                        }
+                    }
+                }
+            }
+        </script>
+    </head>
+    <body>
+
+        <!-- Top Annuncement Bar / Portfolio Label -->
+        <div>
+            <span>green_circle</span>
+            <span>Portfolio demostration | Single-page concept for Bruma Coffee | Pickup & local roast preview</span>
+        </div>
+
+        <!-- Header -->
+        <header>
+            <div>
+                <!-- Logo -->
+                <a href="#">
+                    <div>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 1.66666C6.66667 5 5 7.5 5 10.8333C5 13.5929 7.24042 15.8333 10 15.8333C12.7596 15.8333 15 13.5929 15 10.8333C15 7.5 13.3333 5 10 1.66666Z" fill="#B78064"/>
+                            <path d="M10 1.66666C6.66667 5 5 7.5 5 10.8333C5 13.5929 7.24042 15.8333 10 15.8333C12.7596 15.8333 15 13.5929 15 10.8333C15 7.5 13.3333 5 10 1.66666V1.66666" stroke="#302820" stroke-width="1.66667"/>
+                            <path d="M8.75 15.8333C8.75 16.5232 9.31011 17.0833 10 17.0833C10.6899 17.0833 11.25 16.5232 11.25 15.8333C11.25 15.1434 10.6899 14.5833 10 14.5833C9.31011 14.5833 8.75 15.1434 8.75 15.8333Z" fill="#B8EECB"/>
+                            <path d="M8.75 15.8333C8.75 16.5232 9.31011 17.0833 10 17.0833C10.6899 17.0833 11.25 16.5232 11.25 15.8333C11.25 15.1434 10.6899 14.5833 10 14.5833C9.31011 14.5833 8.75 15.1434 8.75 15.8333V15.8333" stroke="#B78064" stroke-width="1.66667"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span>BRUMA</span>
+                        <span>Coffee</span>
+                    </div>
+                </a>
+                <!-- Nav Anchors -->
+                <nav>
+                    <a href="#story">Our Story</a>
+                    <a href="#favorites">Favorites</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#pickup">Visit & Pickup</a>
+                </nav>
+
+                <!-- Action Button -->
+                <div>
+                    <a href="#favorites">Explore the Menu</a>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Hero Section -->
+            <section id="hero">
+                <!-- Mint Graphic Background -->
+                <div></div>
+                <div></div>
+
+                <div>
+                    <div>
+                        <!-- Text Column -->
+                        <div>
+                            <div>
+                                <span>Brown_dot</span>
+                                <span>NEIGHBORNHOOD SPECIALITY ROASTERY</span>
+                            </div>
+
+                            <h1>
+                                A little warmth in every cup.
+                            </h1>
+
+                            <p>Thoughfully brewed specialty coffee, made for slow moments and busy mornings. Roasted in micro-batches with meticulous care and quiet joy.</p>
+
+                            <div>
+                                <a href="#favorites">Explore the Menu</a>
+                                <a href="#story">Our Story</a>
+                            </div>
+
+                            <div>
+                                <div>
+                                    <p>100%</p>
+                                    <p>Direct trade beans</p>
+                                </div>
+                                <div>
+                                    <p>72 hr</p>
+                                    <p>Peak freshness roast</p>
+                                </div>
+                                <div>
+                                    <p>4.9 / 5</p>
+                                    <p>Craft standard</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Image Column -->
+                        <div>
+                            <!-- Shape -->
+                            <div>
+                                <svg></svg>
+                            </div>
+
+                            <div>
+                                <img src="assets/images/artisanal.webp" alt="Warm ceramic cup with latte art on a rustic wooden table in soft morning sunlight">
+                                <div></div>
+                                <div>
+                                    <span>Morning Roast</span>
+                                    <p>Ethiopia Yirgacheffe Natural</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Story Section -->
+            <section id="story">
+                <div>
+                    <!-- Image Column -->
+                    <div>
+                        <img src="assets/images/barista.webp" alt="Barista carefully pouring water from gooseneck kettle into ceramic pour-over filter">
+                        <div>
+                            <span>Morning Roast</span>
+                            <span>Ethiopia </span>
+                        </div>
+                    </div>
+                    <!-- Text Column -->
+                    <div>
+                        <span></span>
+                        <h2></h2>
+                        <div>
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Favorites Section -->
+            <section id="favorites">
+                <div>
+                    <!-- Title Column -->
+                    <div>
+                        <div>
+                            <span>SEASONAL</span>
+                            <h2>House Favorites</h2>
+                        </div>
+                        <div>
+                            <p>Carefully tuned profiles highlighting balanced acidity, creamy texture, and natural botanical sweetness.</p>
+                        </div>
+                    </div>
+
+                    <!-- Menu Grid -->
+                    <div>
+                        <article>
+                            <div>
+                                <span>SIGNATURE</span>
+                                <img src="assets/images/honey_coffee.webp" alt="">
+                            </div>
+                            <div>
+                                <h3>Honey Oat Latte</h3>
+                                <span>
+                                    $6.25
+                                </span>
+                            </div>
+                            <div>
+                                <p>Slow-pulled double espresso, organic steamed oat milk, wildflower honey reduction, and golden honeycomb crumb.</p>
+                            </div>
+                            <div>
+                                <span>Tasting: Toasted Grain | Honeycomb</span>
+                                <span>Hot / Iced</span>
+                            </div>
+                        </article>
+                        <article>
+                            <div>
+                                <span>CHILLED</span>
+                                <img src="assets/images/iced_coldbrew.webp" alt="">
+                            </div>
+                            <div>
+                                <h3>Iced Vanilla Cold Brew</h3>
+                                <span>
+                                    $5.85
+                                </span>
+                            </div>
+                            <div>
+                                <p>Twenty-hour steeped single-origin cold brew topped with Madagascar vanilla-bean infused sweet cream cloud.</p>
+                            </div>
+                            <div>
+                                <span>Tasting: Dark Cacao | Sweet Cream</span>
+                                <span>Iced Only</span>
+                            </div>
+                        </article>
+                        <article>
+                            <div>
+                                <span>SEASONAL</span>
+                                <img src="assets/images/cinnamon_coffee.webp" alt="">
+                            </div>
+                            <div>
+                                <h3>Cinnamon Cloud Cappucino</h3>
+                                <span>
+                                    $5.50
+                                </span>
+                            </div>
+                            <p>Velvety microfoam aerated over rich hazelnut-noted espresso, dusted with fresh stone-ground Ceylon cinnamon.</p>
+                            <div>
+                                <span>Tasting: Ceylon Spice | Hazelnut</span>
+                                <span>Hot</span>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Experience Section -->
+            <section id="experience">
+                <div>
+                    <div>
+                        <span>THE RITUAL</span>
+                        <h2>A space designed for deliberate slowing down.</h2>
+                        <p>Every texture, sound, and ceramic cup is calibrated to create a welcoming sensory pause in the neighborhood.</p>
+                    </div>
+
+                    <!-- TODO: Aquí va a ir un pinche grid de cagada-->
+                    <div></div>
+                </div>
+            </section>
+
+            <!-- Pickup Section -->
+            <section id="pickup">
+                <div>
+                    <div>
+                        <!-- Mint decorative touch -->
+                        <div></div>
+                        <div>
+                            <span>PICKUP & LOCAL ROASTERY</span>
+                            <h2>Pick up fresh batches or get beans delivered to your door.</h2>
+                            <p>Bruma operates as a micro-batch roast lab. Order your whole beans 
+                                online for weekly neighborhood drop-offs, or choose counter pickup
+                                during our weekend roasting sessions.
+                            </p>
+                            <div>
+                                <a href="#favorites">Explore Our Favorites</a>
+                                <a href="#story">Learn About Our Roasts</a>
+                            </div>
+                            <div>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_2_205)">
+                                    <path d="M1.33333 7.99992C1.33333 11.6794 4.32056 14.6666 8 14.6666C11.6794 14.6666 14.6667 11.6794 14.6667 7.99992C14.6667 4.32049 11.6794 1.33325 8 1.33325C4.32056 1.33325 1.33333 4.32049 1.33333 7.99992V7.99992" stroke="#B78064" stroke-width="1.33333"/>
+                                    <path d="M8 10.6667V8" stroke="#B78064" stroke-width="1.33333"/>
+                                    <path d="M8 5.33325H8.00667" stroke="#B78064" stroke-width="1.33333"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_2_205">
+                                    <rect width="16" height="16" fill="white"/>
+                                    </clipPath>
+                                    </defs>
+                                </svg>
+                                <span>Demonstration concept — Pickup schedule and online checkout are simulated for design-to-code preview.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            <div>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 1.66675C6.66667 5.00008 5 7.50008 5 10.8334C5 13.593 7.24042 15.8334 10 15.8334C12.7596 15.8334 15 13.593 15 10.8334C15 7.50008 13.3333 5.00008 10 1.66675Z" fill="#B8EECB"/>
+                                    <path d="M10 1.66675C6.66667 5.00008 5 7.50008 5 10.8334C5 13.593 7.24042 15.8334 10 15.8334C12.7596 15.8334 15 13.593 15 10.8334C15 7.50008 13.3333 5.00008 10 1.66675V1.66675" stroke="#B8EECB" stroke-width="1.66667"/>
+                                </svg>
+                            </div>
+                            <span>Bruma Coffee</span>
+                        </div>
+                        <p>
+                            A fictional specialty coffee roastery celebrating tactile
+                            craftsmanship, slow mornings, and authentic neighborhood
+                            connection.
+                        </p>
+                        <div>
+                            <span>Concept project - not a real business</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>EXPLORE</h4>
+                        <ul>
+                            <li><a href="#story">Our Story</a></li>
+                            <li><a href="#favorites">Favorites</a></li>
+                            <li><a href="#experience">Experience</a></li>
+                            <li><a href="#pickup">Visit & Pickup</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>DESIGN PORTFOLIO</h4>
+                        <p>
+                            Built as a design-to-code portfolio demonstration with semantic
+                            HTML, Tailwind CSS, and vanilla JS. Follows design tokens defined
+                            in <code>design.md</code>.
+                        </p>
+                        <p>Palette: Mint #B8EECB | Terracotta #B78064 | Cream #FFF7E4 | Espresso #302820</p>
+                    </div>
+                </div>
+                <div>
+                    <p>© 2025 Bruma Coffee. Fictional design concept. All rights reserved.</p>
+                    <p>Crafted with care for frontend portfolio presentation.</p>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
