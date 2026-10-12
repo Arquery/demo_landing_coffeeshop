@@ -257,35 +257,78 @@
             <!-- Experience Section -->
             <section id="experience" class="bg-cream-soft/40 border-b border-warm-outline/40">
                 <div class="container">
-                    <div class="mb-16 text-center">
-                        <span>THE RITUAL</span>
-                        <h2>A space designed for deliberate slowing down.</h2>
-                        <p>Every texture, sound, and ceramic cup is calibrated to create a welcoming sensory pause in the neighborhood.</p>
+                    <div class="mb-16 text-center max-w-2xl mx-auto">
+                        <span class="text-xs text-terracota tracking-widest mb-2">THE RITUAL</span>
+                        <h2 class="mb-4 text-4xl lg:text-5xl text-espresso font-serif">A space designed for deliberate slowing down.</h2>
+                        <p class="text-base text-espresso/70 leading-relaxed">Every texture, sound, and ceramic cup is calibrated to create a welcoming sensory pause in the neighborhood.</p>
                     </div>
 
-                    <!-- TODO: Aquí va a ir un pinche grid de cagada-->
-                    <div>grid</div>
+                    <!-- Asymmetric Editorial Grid / Collage -->
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                        <!-- Feature 1 -->
+                        <div class="hidden md:flex flex-col md:col-span-5 bg-cream border border-warm-outline rounded-2xl p-10 gap-8">
+                            <div class="pb-8">
+                                <div class="mb-6">
+                                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="40" height="40" rx="20" fill="#B8EECB" fill-opacity="0.5"/>
+                                        <path d="M14.1667 20.8333L17.5 24.1666L25.8333 15.8333" stroke="#302820" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>                                
+                                <h3 class="font-serif text-espresso text-3xl mb-4">Tactile ceramics, natural daylight, and unhurried preparation.</h3>
+                                <p class="text-base text-espresso/75 leading-relaxed">We serve all drinks in hand-thrown stoneware cups crafted by local artisans. The natural clay retains heat while offering an earthy tactile experience that disposable paper can never replicate.</p>
+                            </div>
+                            <div class="mt-8 pt-6 border-t border-warm-outline/40 flex items-baseline justify-between text-xs">
+                                <span class="text-espresso/60">HAND-THROWN POTTERY</span>
+                                <span class="text-terracota font-medium">SUSTAINABLE BY DEFAULT</span>
+                            </div>
+                        </div>
+                        <!-- Feature 2 -->
+                        <div class="md:col-span-7 grid grid-cols-2 gap-4">
+                            <div class="rounded-2xl overflow-hidden border border-warm-outline/60 aspect-[3/4] bg-cream shadow-sm">
+                                <img src="assets/images/artisanal.webp" alt="Morning coffee scene with sunlight" class="w-full h-full object-cover">
+                            </div>
+                            <div class="flex flex-col gap-4">
+                                <div class="rounded-2xl bg-cream border border-warm-outline/60 overflow-hidden aspect-square shadow-sm">
+                                    <img src="assets/images/barista.webp" alt="Artisanal pour over coffee detail" class="w-full h-full object-cover">
+                                </div>
+                                <!-- Brand Statement Block -->
+                                <div class="md:hidden">
+                                    <h3>Tactile stoneware cups</h3>
+                                    <span>Crafted by local ceramicists to retain heat and celebrate authentic clay texture with every sip.</span>
+                                </div>
+                                <div class="rounded-2xl bg-espresso text-cream p-6 flex flex-col justify-center flex-grow">
+                                    <span class="text-xs uppercase tracking-widest text-mint font-semibold mb-2">Our Promise</span>
+                                    <p class="font-serif text-lg text-cream/95 leading-snug">
+                                        "Zero shortcuts. Real vanilla pods, single-origin roasts, and people who know you by name."
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
             <!-- Pickup Section -->
             <section id="pickup" class="bg-cream border-b border-warm-outline/40">
-                <div class="container bg-cream-soft border border-warm-outline rounded-3xl p-16">
+                <div class="container relative bg-cream-soft border border-warm-outline rounded-3xl p-16">
                     <div>
                         <!-- Mint decorative touch -->
-                        <div></div>
-                        <div>
-                            <span>PICKUP & LOCAL ROASTERY</span>
-                            <h2>Pick up fresh batches or get beans delivered to your door.</h2>
-                            <p>Bruma operates as a micro-batch roast lab. Order your whole beans 
+                        <div class="absolute top-0 right-0 bg-mint/20 rounded-full blur-2xl h-64 w-64 pointer-events-none"></div>
+                        <div class="max-w-2xl relative z-10">
+                            <span class="text-xs text-terracota tracking-widest mb-3">PICKUP & LOCAL ROASTERY</span>
+                            <h2 class="font-serif text-espresso text-4xl md:text-5xl mb-6">Pick up fresh batches or get beans delivered to your door.</h2>
+                            <p class="text-base md:text-lg text-espresso/75 leading-relaxed mb-8">Bruma operates as a micro-batch roast lab. Order your whole beans 
                                 online for weekly neighborhood drop-offs, or choose counter pickup
                                 during our weekend roasting sessions.
                             </p>
                             <div>
-                                <a href="#favorites">Explore Our Favorites</a>
-                                <a href="#story">Learn About Our Roasts</a>
+                                
+                                <div class="flex inline-flex items-center gap-4 mb-5">
+                                    <a href="#favorites" class="inline-flex items-center justify-center bg-espresso px-7 py-3.5 text-cream rounded-full text-base">Explore Our Favorites</a>
+                                <a href="#story" class="inline-flex items-center justify-center border-2 border-espresso/70 px-7 py-3.5 rounded-full text-espresso font-medium text-base">Learn About Our Roasts</a>
+                                </div>
                             </div>
-                            <div>
+                            <div class="flex inline-flex px-3 py-1.5 gap-2 items-center bg-cream/70 border border-warm-outline/60 rounded-lg mt-8">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_2_205)">
                                     <path d="M1.33333 7.99992C1.33333 11.6794 4.32056 14.6666 8 14.6666C11.6794 14.6666 14.6667 11.6794 14.6667 7.99992C14.6667 4.32049 11.6794 1.33325 8 1.33325C4.32056 1.33325 1.33333 4.32049 1.33333 7.99992V7.99992" stroke="#B78064" stroke-width="1.33333"/>
@@ -298,7 +341,7 @@
                                     </clipPath>
                                     </defs>
                                 </svg>
-                                <span>Demonstration concept — Pickup schedule and online checkout are simulated for design-to-code preview.</span>
+                                <span class="text-xs text-espresso/60">Demonstration concept — Pickup schedule and online checkout are simulated for design-to-code preview.</span>
                             </div>
                         </div>
                     </div>
@@ -308,46 +351,45 @@
 
         <footer class="bg-espresso border-t border-espresso text-cream px-[52px] py-16">
             <div class="container">
-                <div>
-                    <div>
-                        <div>
-                            <div>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+                    <div class="md:col-span-5">
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-8 h-8 rounded-full bg-cream/10 flex items-center justify-center text-mint">
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10 1.66675C6.66667 5.00008 5 7.50008 5 10.8334C5 13.593 7.24042 15.8334 10 15.8334C12.7596 15.8334 15 13.593 15 10.8334C15 7.50008 13.3333 5.00008 10 1.66675Z" fill="#B8EECB"/>
                                     <path d="M10 1.66675C6.66667 5.00008 5 7.50008 5 10.8334C5 13.593 7.24042 15.8334 10 15.8334C12.7596 15.8334 15 13.593 15 10.8334C15 7.50008 13.3333 5.00008 10 1.66675V1.66675" stroke="#B8EECB" stroke-width="1.66667"/>
                                 </svg>
                             </div>
-                            <span>Bruma Coffee</span>
+                            <span class="font-serif text-2xl font-bold tracking-tight text-cream">Bruma Coffee</span>
                         </div>
-                        <p>
-                            A fictional specialty coffee roastery celebrating tactile
-                            craftsmanship, slow mornings, and authentic neighborhood
-                            connection.
+                        <p class="text-sm text-cream/70 max-w-sm leading-relaxed mb-6">
+                            A fictional specialty coffee roastery celebrating tactile craftsmanship, slow mornings, and authentic neighborhood connection.
                         </p>
-                        <div>
+                        <div class="inline-block px-3 py-1 rounded bg-cream/10 text-xs text-mint font-mono">
                             <span>Concept project - not a real business</span>
                         </div>
                     </div>
-                    <div>
-                        <h4>EXPLORE</h4>
-                        <ul>
-                            <li><a href="#story">Our Story</a></li>
-                            <li><a href="#favorites">Favorites</a></li>
-                            <li><a href="#experience">Experience</a></li>
-                            <li><a href="#pickup">Visit & Pickup</a></li>
+                    <div class="md:col-span-3">
+                        <h4 class="text-xs uppercase tracking-widest text-cream/50 font-semibold mb-4">EXPLORE</h4>
+                        <ul class="space-y-2.5 text-sm text-cream/80">
+                            <li><a href="#story" class="hover:text-mint transition-colors">Our Story</a></li>
+                            <li><a href="#favorites" class="hover:text-mint transition-colors">Seasonal Favorites</a></li>
+                            <li><a href="#experience" class="hover:text-mint transition-colors">The Experience</a></li>
+                            <li><a href="#pickup" class="hover:text-mint transition-colors">Visit & Pickup</a></li>
                         </ul>
                     </div>
-                    <div>
-                        <h4>DESIGN PORTFOLIO</h4>
-                        <p>
+                    <div class="md:col-span-4">
+                        <h4 class="text-xs uppercase tracking-widest text-cream/50 font-semibold mb-4">DESIGN PORTFOLIO</h4>
+                        <p class="text-xs text-cream/70 leading-relaxed mb-3">
                             Built as a design-to-code portfolio demonstration with semantic
                             HTML, Tailwind CSS, and vanilla JS. Follows design tokens defined
-                            in <code>design.md</code>.
+                            in <code class="text-mint font-mono">design.md</code>.
                         </p>
-                        <p>Palette: Mint #B8EECB | Terracota #B78064 | Cream #FFF7E4 | Espresso #302820</p>
+                        <p class="text-xs text-cream/50 font-mono">Palette: Mint #B8EECB | Terracota #B78064 | Cream #FFF7E4 | Espresso #302820</p>
                     </div>
                 </div>
-                <div>
+                <!-- Bottom Credits -->
+                <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-cream/50 gap-4">
                     <p>© 2025 Bruma Coffee. Fictional design concept. All rights reserved.</p>
                     <p>Crafted with care for frontend portfolio presentation.</p>
                 </div>
