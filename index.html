@@ -18,10 +18,9 @@
                             'cream-soft': '#F7EBD8',
                             'cream-surface': '#FFFDF9',
                             espresso: '#302820',
-                            terracorta: '#B78064',
+                            terracota: '#B78064',
                             mint: '#B8EECB',
-                            'warm-outline': '#DCCBB7',
-                            'warm-border': 'rbga(220,203,183,0.7)'
+                            'warm-outline': '#DCCBB7'
                         },
                         fontFamily: {
                             serif: ['"DM Serif Display"', 'Georgia', 'serif'],
@@ -35,99 +34,114 @@
     <body>
 
         <!-- Top Annuncement Bar / Portfolio Label -->
-        <div>
-            <span>green_circle</span>
-            <span>Portfolio demostration | Single-page concept for Bruma Coffee | Pickup & local roast preview</span>
+        <div class="bg-cream-soft border-b border-warm-outline/40 text-center text-xs py-2 px-4">
+            <span class="inline-flex items-center gap-2">
+                <span class="bg-mint rounded-full w-2 h-2"></span>
+                Portfolio demostration | Single-page concept for Bruma Coffee | Pickup & local roast preview</span>
         </div>
 
         <!-- Header -->
-        <header>
-            <div>
+        <header class="sticky top-0 z-50 border-b border-warm-outline/60 px-5 bg-cream/95  backdrop-blur-md tramsition-all">
+            <div class="flex items-center justify-between max-w-[1240px] mx-auto px-6 lg:px-8 h-20">
                 <!-- Logo -->
-                <a href="#">
+                <a href="#" class="inline-flex items-center h-6 gap-3">
                     <div>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M10 1.66666C6.66667 5 5 7.5 5 10.8333C5 13.5929 7.24042 15.8333 10 15.8333C12.7596 15.8333 15 13.5929 15 10.8333C15 7.5 13.3333 5 10 1.66666Z" fill="#B78064"/>
-                            <path d="M10 1.66666C6.66667 5 5 7.5 5 10.8333C5 13.5929 7.24042 15.8333 10 15.8333C12.7596 15.8333 15 13.5929 15 10.8333C15 7.5 13.3333 5 10 1.66666V1.66666" stroke="#302820" stroke-width="1.66667"/>
-                            <path d="M8.75 15.8333C8.75 16.5232 9.31011 17.0833 10 17.0833C10.6899 17.0833 11.25 16.5232 11.25 15.8333C11.25 15.1434 10.6899 14.5833 10 14.5833C9.31011 14.5833 8.75 15.1434 8.75 15.8333Z" fill="#B8EECB"/>
-                            <path d="M8.75 15.8333C8.75 16.5232 9.31011 17.0833 10 17.0833C10.6899 17.0833 11.25 16.5232 11.25 15.8333C11.25 15.1434 10.6899 14.5833 10 14.5833C9.31011 14.5833 8.75 15.1434 8.75 15.8333V15.8333" stroke="#B78064" stroke-width="1.66667"/>
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="32" height="32" rx="16" fill="#B78064" fill-opacity="0.15"/>
+                            <path d="M16 7.66666C12.6667 11 11 13.5 11 16.8333C11 19.5929 13.2404 21.8333 16 21.8333C18.7596 21.8333 21 19.5929 21 16.8333C21 13.5 19.3333 11 16 7.66666Z" fill="#B78064"/>
+                            <path d="M16 7.66666C12.6667 11 11 13.5 11 16.8333C11 19.5929 13.2404 21.8333 16 21.8333C18.7596 21.8333 21 19.5929 21 16.8333C21 13.5 19.3333 11 16 7.66666V7.66666" stroke="#302820" stroke-width="1.66667"/>
+                            <path d="M14.75 21.8333C14.75 22.5232 15.3101 23.0833 16 23.0833C16.6899 23.0833 17.25 22.5232 17.25 21.8333C17.25 21.1434 16.6899 20.5833 16 20.5833C15.3101 20.5833 14.75 21.1434 14.75 21.8333Z" fill="#B8EECB"/>
+                            <path d="M14.75 21.8333C14.75 22.5232 15.3101 23.0833 16 23.0833C16.6899 23.0833 17.25 22.5232 17.25 21.8333C17.25 21.1434 16.6899 20.5833 16 20.5833C15.3101 20.5833 14.75 21.1434 14.75 21.8333V21.8333" stroke="#B78064" stroke-width="1.66667"/>
                         </svg>
                     </div>
-                    <div>
-                        <span>BRUMA</span>
-                        <span>Coffee</span>
+                    <div class="flex items-baseline gap-1.5">
+                        <span class="font-serif text-2xl">BRUMA</span>
+                        <span class="font-sans text-xs text-terracota">Coffee</span>
                     </div>
                 </a>
                 <!-- Nav Anchors -->
-                <nav>
-                    <a href="#story">Our Story</a>
-                    <a href="#favorites">Favorites</a>
-                    <a href="#experience">Experience</a>
-                    <a href="#pickup">Visit & Pickup</a>
+                <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-espresso/80">
+                    <a href="#story" class="">Our Story</a>
+                    <a href="#favorites" class="">Favorites</a>
+                    <a href="#experience" class="">Experience</a>
+                    <a href="#pickup" class="">Visit & Pickup</a>
                 </nav>
 
                 <!-- Action Button -->
-                <div>
-                    <a href="#favorites">Explore the Menu</a>
+                <div class="hidden md:flex items-center gap-4">
+                    <a href="#favorites" class="inline-flex items-center justify-center bg-espresso rounded-full py-2.5 px-5 text-cream font-medium text-sm tracking-wide">Explore the Menu</a>
                 </div>
             </div>
         </header>
 
         <main>
             <!-- Hero Section -->
-            <section id="hero">
+            <section id="hero" class="relative pt-12 pb-20 overflow-hidden border-b border-warm-outline/40">
                 <!-- Mint Graphic Background -->
-                <div></div>
-                <div></div>
+                <div class="absolute -top-16 -right-16 bg-mint/30 h-96 w-96 rounded-full blur-3xl pointer-events-none -z-10" ></div>
+                <div class="absolute bottom-10 left-10 bg-terracota/10 h-64 w-64 rounded-full blur-2xl pointer-events-none -z-10"></div>
 
-                <div>
-                    <div>
+                <div class="container">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                         <!-- Text Column -->
-                        <div>
-                            <div>
-                                <span>Brown_dot</span>
-                                <span>NEIGHBORNHOOD SPECIALITY ROASTERY</span>
+                        <div class="lg:col-span-7">
+                            <div class="inline-flex items-center bg-cream-soft rounded-full border border-warm-outline/80 mb-6 gap-2 px-3.5 py-1.5">
+                                <span class="bg-terracota rounded-full h-2 w-2"></span>
+                                <span class="text-sans text-xs font-espresso/80 font-semibold">NEIGHBORNHOOD SPECIALITY ROASTERY</span>
                             </div>
 
-                            <h1>
+                            <h1 class="mb-6 font-serif leading-[1.08] text-5xl md:text-6xl lg:text-[70px] text-espresso">
                                 A little warmth in every cup.
                             </h1>
 
-                            <p>Thoughfully brewed specialty coffee, made for slow moments and busy mornings. Roasted in micro-batches with meticulous care and quiet joy.</p>
+                            <p class="text-lg md:text-xl text-espresso/75 font-normal leading-relaxed mb-8 max-w-xl">Thoughfully brewed specialty coffee, made for slow moments and busy mornings. Roasted in micro-batches with meticulous care and quiet joy.</p>
 
-                            <div>
-                                <a href="#favorites">Explore the Menu</a>
-                                <a href="#story">Our Story</a>
+                            <div class="flex inline-flex items-center gap-4 mb-10">
+                                <a href="#favorites" class="inline-flex items-center justify-center bg-espresso px-7 py-3.5 text-cream rounded-full text-base">Explore the Menu</a>
+                                <a href="#story" class="inline-flex items-center justify-center border-2 border-espresso/70 px-7 py-3.5 rounded-full text-espresso font-medium text-base">Our Story</a>
                             </div>
 
-                            <div>
+                            <div class="w-full max-w-lg pt-6 border-t border-warm-outline/60 grid grid-cols-3">
                                 <div>
-                                    <p>100%</p>
-                                    <p>Direct trade beans</p>
+                                    <p class="font-serif text-2xl text-espresso font-medium">100%</p>
+                                    <p class="text-xs text-espresso/70 font-normal mt-0.5">Direct trade beans</p>
                                 </div>
                                 <div>
-                                    <p>72 hr</p>
-                                    <p>Peak freshness roast</p>
+                                    <p class="font-serif text-2xl text-espresso font-medium">72 hr</p>
+                                    <p class="text-xs text-espresso/70 font-normal mt-0.5">Peak freshness roast</p>
                                 </div>
                                 <div>
-                                    <p>4.9 / 5</p>
-                                    <p>Craft standard</p>
+                                    <p class="font-serif text-2xl text-espresso font-medium">4.9 / 5</p>
+                                    <p class="text-xs text-espresso/70 font-normal mt-0.5">Craft standard</p>
                                 </div>
                             </div>
                         </div>
                         <!-- Image Column -->
-                        <div>
+                        <div class="lg:col-span-5 relative">
                             <!-- Shape -->
-                            <div>
-                                <svg></svg>
+                            <div class="absolute -bottom-6 -left-6 w-28 h-28 rounded-2xl bg-mint transform -rotate-6 z-0 flex items-center justify-center shadow-sm">
+                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <g clip-path="url(#clip0_2_46)">
+                                    <path d="M31.2286 14.3052L32.8861 14.131C36.5453 13.7464 39.8283 16.405 40.2129 20.0642C40.5975 23.7234 37.9389 27.0064 34.2797 27.391L32.6222 27.5652" stroke="#302820" stroke-opacity="0.6" stroke-width="2.49994"/>
+                                    <path d="M4.70868 17.0926L31.2286 14.3052L32.7965 29.2227C33.1813 32.8843 30.525 36.1647 26.8633 36.5495L13.6034 37.9432C9.94174 38.328 6.66141 35.6717 6.27656 32.0101L4.70868 17.0926V17.0926" stroke="#302820" stroke-opacity="0.6" stroke-width="2.49994"/>
+                                    <path d="M10.1192 4.79327L10.6418 9.76576" stroke="#302820" stroke-opacity="0.6" stroke-width="2.49994"/>
+                                    <path d="M16.7491 4.09644L17.2718 9.06892" stroke="#302820" stroke-opacity="0.6" stroke-width="2.49994"/>
+                                    <path d="M23.3792 3.3996L23.9018 8.37208" stroke="#302820" stroke-opacity="0.6" stroke-width="2.49994"/>
+                                    </g>
+                                    <defs>
+                                    <clipPath id="clip0_2_46">
+                                    <rect width="39.999" height="39.999" fill="white" transform="translate(0 4.18103) rotate(-5.99997)"/>
+                                    </clipPath>
+                                    </defs>
+                                </svg>
                             </div>
 
-                            <div>
-                                <img src="assets/images/artisanal.webp" alt="Warm ceramic cup with latte art on a rustic wooden table in soft morning sunlight">
-                                <div></div>
-                                <div>
-                                    <span>Morning Roast</span>
-                                    <p>Ethiopia Yirgacheffe Natural</p>
+                            <div class="relative z-10 bg-cream-soft border-4 border-cream-surface rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-[1/1.1] shadow-xl">
+                                <img src="assets/images/artisanal.webp" alt="Warm ceramic cup with latte art on a rustic wooden table in soft morning sunlight" class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-espresso/40 via-transparent to-transparent opacity-60"></div>
+                                <div class="absolute bottom-5 right-5 py-2 px-4 bg-cream/95 border border-warm-outline/80 rounded-xl backdrop-blur-sm text-xs">
+                                    <span class="text-terracota font-semibold">Morning Roast</span>
+                                    <p class="text-espresso font-semibold">Ethiopia Yirgacheffe Natural</p>
                                 </div>
                             </div>
                         </div>
@@ -136,98 +150,104 @@
             </section>
 
             <!-- Story Section -->
-            <section id="story">
-                <div>
+            <section id="story" class="bg-cream-soft/60 border-b border-warm-outline/40">
+                <div class="container grid grid-cols-1 lg:grid-cols-12 lg:gap-16 items-center">
                     <!-- Image Column -->
-                    <div>
-                        <img src="assets/images/barista.webp" alt="Barista carefully pouring water from gooseneck kettle into ceramic pour-over filter">
-                        <div>
-                            <span>Morning Roast</span>
-                            <span>Ethiopia </span>
+                    <div class="lg:col-span-6 relative gap-8">
+                        <div class="relative rounded-2xl overflow-hidden border border-warm-outline shadow-md bg-cream aspect-[4/3]">
+                            <img src="assets/images/barista.webp" alt="Barista carefully pouring water from gooseneck kettle into ceramic pour-over filter">
+                        </div>                        
+                        <div class="mt-4 flex items-center justify-between text-xs text-espresso/70 px-2 font-mono">
+                            <span>FIGURE 01: THE MORNING BLOOM</span>
+                            <span>RATIO 1:16 • 93°C</span>
                         </div>
                     </div>
-                    <!-- Text Column -->
-                    <div>
-                        <span></span>
-                        <h2></h2>
-                        <div>
-                            <p></p>
-                            <p></p>
-                            <p></p>
+                    <!-- Story Content -->
+                    <div class="lg:col-span-6">
+                        <span class="text-xs uppercase tracking-widest font-semibold text-terracota block mb-3">Our Story</span>
+                        <h2 class="serif-display text-4xl lg:text-5xl leading-tight text-espresso mb-6">
+                            Rooted in craft, shaped by everyday rituals.
+                        </h2>
+                        <div class="space-y-4 text-base md:text-lg text-espresso/80 leading-relaxed font-normal">
+                            <p>
+                            Bruma was conceived around a simple conviction: coffee isn’t just fuel for a to-do list; it’s an invitation to pause, breathe, and savor quiet craftsmanship.
+                            </p>
+                            <p>
+                            From washed high-altitude lots to delicate honey processes, our roasters coax out terroir without aggressive char. We partner directly with smallholder farming communities, ensuring respectful compensation and transparent provenance.
+                            </p>
+                            <p class="text-base text-espresso/70 italic border-l-2 border-terracota pl-4 py-1">
+                            "We measure our success not by the volume of cups poured, but by the stillness we restore to your morning."
+                            </p>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Favorites Section -->
-            <section id="favorites">
-                <div>
+            <section id="favorites" class="bg-cream border-b border-warm-outline/40">
+                <div class="container">
                     <!-- Title Column -->
-                    <div>
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
                         <div>
-                            <span>SEASONAL</span>
-                            <h2>House Favorites</h2>
+                            <span class="font-sans text-xs text-terracota mb-2 traking-widest block">SEASONAL MENU</span>
+                            <h2 class="font-serif text-espresso text-4xl lg:text-5xl">House Favorites</h2>
                         </div>
-                        <div>
+                        <div class="max-w-md text-sm md:text-base text-espresso/70 font-normal mr-14">
                             <p>Carefully tuned profiles highlighting balanced acidity, creamy texture, and natural botanical sweetness.</p>
                         </div>
                     </div>
 
                     <!-- Menu Grid -->
-                    <div>
-                        <article>
-                            <div>
-                                <span>SIGNATURE</span>
-                                <img src="assets/images/honey_coffee.webp" alt="">
+                    <div class="grid grid-cols-1 grid-cols-3 gap-8">
+                        <article class="warm-card flex flex-col">
+                            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-cream-soft mb-5 border border-warm-outline/40">
+                                <span class="absolute top-3 left-3 rounded-full px-2.5 py-1 bg-cream/90 border border-warm-outline/50 backdrop-blur-sm text-espresso text-[11px] font-semibold tracking-wider">SIGNATURE</span>
+                                <img src="assets/images/honey_coffee.webp" alt="Honey Oat Latte in a ribbed glass with layered espresso and honey drizzle" class="w-full h-full object-cover">
                             </div>
-                            <div>
-                                <h3>Honey Oat Latte</h3>
-                                <span>
+                            <div class="mb-2 flex items-baseline justify-between">
+                                <h3 class="font-serif text-espresso text-2xl font-medium">Honey Oat Latte</h3>
+                                <span class="font-mono text-terracota text-sm font-bold">
                                     $6.25
                                 </span>
                             </div>
-                            <div>
-                                <p>Slow-pulled double espresso, organic steamed oat milk, wildflower honey reduction, and golden honeycomb crumb.</p>
-                            </div>
-                            <div>
-                                <span>Tasting: Toasted Grain | Honeycomb</span>
-                                <span>Hot / Iced</span>
+                            <p class="font-sans text-sm text-espresso/75 leading-relaxed mb-6">Slow-pulled double espresso, organic steamed oat milk, wildflower honey reduction, and golden honeycomb crumb.</p>
+                            <div class="pt-4 border-t border-warm-outline/40 flex items-baseline justify-between text-xs">
+                                <span class="text-espresso/60">Tasting: Toasted Grain | Honeycomb</span>
+                                <span class="text-terracota font-medium">Hot / Iced</span>
                             </div>
                         </article>
-                        <article>
-                            <div>
-                                <span>CHILLED</span>
-                                <img src="assets/images/iced_coldbrew.webp" alt="">
+                        <article class="warm-card flex flex-col">
+                            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-cream-soft mb-5 border border-warm-outline/40">
+                                <span class="absolute top-3 left-3 rounded-full px-2.5 py-1 bg-mint/90 border border-warm-outline/50 backdrop-blur-sm text-espresso text-[11px] font-semibold tracking-wider">CHILLED</span>
+                                <img src="assets/images/iced_coldbrew.webp" alt="Iced Vanilla Cold Brew in fluted glass with cascading sweet cream" class="w-full h-full object-cover">
                             </div>
-                            <div>
-                                <h3>Iced Vanilla Cold Brew</h3>
-                                <span>
+                            <div class="mb-2 flex items-baseline justify-between">
+                                <h3 class="font-serif text-espresso text-2xl font-medium">Iced Vanilla Cold Brew</h3>
+                                <span class="font-mono text-terracota text-sm font-bold">
                                     $5.85
                                 </span>
                             </div>
-                            <div>
-                                <p>Twenty-hour steeped single-origin cold brew topped with Madagascar vanilla-bean infused sweet cream cloud.</p>
-                            </div>
-                            <div>
-                                <span>Tasting: Dark Cacao | Sweet Cream</span>
-                                <span>Iced Only</span>
+                            <p class="font-sans text-sm text-espresso/75 leading-relaxed mb-6">Twenty-hour steeped single-origin cold brew topped with Madagascar vanilla-bean infused sweet cream cloud.</p>
+                            <div class="pt-4 border-t border-warm-outline/40 flex items-baseline justify-between text-xs">
+                                <span class="text-espresso/60">Tasting: Dark Cacao | Sweet Cream</span>
+                                <span class="text-terracota font-medium">Iced Only</span>
                             </div>
                         </article>
-                        <article>
-                            <div>
-                                <span>SEASONAL</span>
-                                <img src="assets/images/cinnamon_coffee.webp" alt="">
+                        <article class="warm-card flex flex-col">
+                            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-cream-soft mb-5 border border-warm-outline/40">
+                                <span class="absolute top-3 left-3 rounded-full px-2.5 py-1 bg-cream/90 border border-warm-outline/50 backdrop-blur-sm text-espresso text-[11px] font-semibold tracking-wider">SEASONAL</span>
+                                <img src="assets/images/cinnamon_coffee.webp" alt="Cinnamon Cloud Cappuccino in matte ceramic cup with delicate spice dust" class="w-full h-full object-cover">
                             </div>
-                            <div>
-                                <h3>Cinnamon Cloud Cappucino</h3>
-                                <span>
+                            <div class="mb-2 flex items-baseline justify-between">
+                                <h3 class="font-serif text-espresso text-2xl font-medium">Cinnamon Cappucino</h3>
+                                <span class="font-mono text-terracota text-sm font-bold">
                                     $5.50
                                 </span>
                             </div>
-                            <p>Velvety microfoam aerated over rich hazelnut-noted espresso, dusted with fresh stone-ground Ceylon cinnamon.</p>
-                            <div>
-                                <span>Tasting: Ceylon Spice | Hazelnut</span>
-                                <span>Hot</span>
+                            <p class="font-sans text-sm text-espresso/75 leading-relaxed mb-6">Velvety microfoam aerated over rich hazelnut-noted espresso, dusted with fresh stone-ground Ceylon cinnamon.</p>
+                            <div class="pt-4 border-t border-warm-outline/40 flex items-baseline justify-between text-xs">
+                                <span class="text-espresso/60">Tasting: Ceylon Spice | Hazelnut</span>
+                                <span class="text-terracota font-medium">Hot</span>
                             </div>
                         </article>
                     </div>
@@ -235,22 +255,22 @@
             </section>
 
             <!-- Experience Section -->
-            <section id="experience">
-                <div>
-                    <div>
+            <section id="experience" class="bg-cream-soft/40 border-b border-warm-outline/40">
+                <div class="container">
+                    <div class="mb-16 text-center">
                         <span>THE RITUAL</span>
                         <h2>A space designed for deliberate slowing down.</h2>
                         <p>Every texture, sound, and ceramic cup is calibrated to create a welcoming sensory pause in the neighborhood.</p>
                     </div>
 
                     <!-- TODO: Aquí va a ir un pinche grid de cagada-->
-                    <div></div>
+                    <div>grid</div>
                 </div>
             </section>
 
             <!-- Pickup Section -->
-            <section id="pickup">
-                <div>
+            <section id="pickup" class="bg-cream border-b border-warm-outline/40">
+                <div class="container bg-cream-soft border border-warm-outline rounded-3xl p-16">
                     <div>
                         <!-- Mint decorative touch -->
                         <div></div>
@@ -286,8 +306,8 @@
             </section>
         </main>
 
-        <footer>
-            <div>
+        <footer class="bg-espresso border-t border-espresso text-cream px-[52px] py-16">
+            <div class="container">
                 <div>
                     <div>
                         <div>
@@ -324,7 +344,7 @@
                             HTML, Tailwind CSS, and vanilla JS. Follows design tokens defined
                             in <code>design.md</code>.
                         </p>
-                        <p>Palette: Mint #B8EECB | Terracotta #B78064 | Cream #FFF7E4 | Espresso #302820</p>
+                        <p>Palette: Mint #B8EECB | Terracota #B78064 | Cream #FFF7E4 | Espresso #302820</p>
                     </div>
                 </div>
                 <div>

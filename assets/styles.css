@@ -18,3 +18,19 @@ body {
     transform: translateY(-4px) scale(1.01);
     box-shadow: 0 16px 32px -8px rgba(48, 40, 32, 0.08);
 }
+
+section {
+    padding: 96px 52px;
+
+    .container {
+        max-width: 1240px;
+        margin: 0 auto;
+    }
+}
+
+article {
+    background-color: #FFFDF9;
+    border: solid 1px #DCCBB7;
+    border-radius: 16px;
+    padding: 22px;
+}
