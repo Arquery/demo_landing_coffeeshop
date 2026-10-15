@@ -30,19 +30,85 @@
                 }
             }
         </script>
+
+        <script>
+            let isMenuOpen = false;
+            let openScrollY = 0;
+            let canCloseOnScroll = false;
+            let scrollGraceTimeout = null;
+
+            function openMenu() {
+                const menu = document.getElementById('mobile-menu');
+                const iconPath = document.getElementById('menu-icon-path');
+                if (!menu) return;
+                
+                isMenuOpen = true;
+                openScrollY = window.scrollY;
+                canCloseOnScroll = false;
+                
+                clearTimeout(scrollGraceTimeout);
+                scrollGraceTimeout = setTimeout(() => {
+                    openScrollY = window.scrollY;
+                    canCloseOnScroll = true;
+                }, 200);
+
+                menu.classList.remove('invisible', 'max-h-0', 'opacity-0', '-translate-y-2', 'pointer-events-none', 'border-b-0');
+                menu.classList.add('visible', 'max-h-[500px]', 'opacity-100', 'translate-y-0', 'pointer-events-auto', 'border-b');
+                if (iconPath) {
+                    iconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+                }
+            }
+
+            function closeMenu() {
+                const menu = document.getElementById('mobile-menu');
+                const iconPath = document.getElementById('menu-icon-path');
+                if (!menu) return;
+                
+                isMenuOpen = false;
+                canCloseOnScroll = false;
+                clearTimeout(scrollGraceTimeout);
+
+                menu.classList.remove('visible', 'max-h-[500px]', 'opacity-100', 'translate-y-0', 'pointer-events-auto', 'border-b');
+                menu.classList.add('invisible', 'max-h-0', 'opacity-0', '-translate-y-2', 'pointer-events-none', 'border-b-0');
+                if (iconPath) {
+                    iconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+                }
+            }
+
+            function toggleMenu() {
+                if (isMenuOpen) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            }
+
+            // Auto-close menu on scroll
+            window.addEventListener('scroll', () => {
+                if (isMenuOpen && canCloseOnScroll && Math.abs(window.scrollY - openScrollY) > 10) {
+                    closeMenu();
+                }
+            }, { passive: true });
+
+            // Auto-close menu on resize to desktop
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768 && isMenuOpen) {
+                    closeMenu();
+                }
+            });
+        </script>
     </head>
-    <body>
+    <body class="bg-cream text-espresso selection:bg-mint selection:text-espresso">
 
         <!-- Top Annuncement Bar / Portfolio Label -->
-        <div class="bg-cream-soft border-b border-warm-outline/40 text-center text-xs py-2 px-4">
-            <span class="inline-flex items-center gap-2">
-                <span class="bg-mint rounded-full w-2 h-2"></span>
-                Portfolio demostration | Single-page concept for Bruma Coffee | Pickup & local roast preview</span>
+        <div class="bg-cream-soft border-b border-warm-outline/50 md:border-warm-outline/40 py-2 px-4 text-center text-[11px] md:text-xs text-espresso/70 md:text-espresso flex items-center justify-center gap-1.5 md:gap-2">
+            <span class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-mint flex-shrink-0"></span>
+            <span class="truncate md:overflow-visible">Portfolio demostration | Single-page concept for Bruma Coffee | Pickup & local roast preview</span>
         </div>
 
         <!-- Header -->
-        <header class="sticky top-0 z-50 border-b border-warm-outline/60 px-5 bg-cream/95  backdrop-blur-md tramsition-all">
-            <div class="flex items-center justify-between max-w-[1240px] mx-auto px-6 lg:px-8 h-20">
+        <header class="sticky top-0 z-50 relative border-b border-warm-outline/60 px-5 bg-cream/95 backdrop-blur-md transition-all">
+            <div class="flex items-center justify-between max-w-[1240px] mx-auto px-0 md:px-6 lg:px-8 h-16 md:h-20">
                 <!-- Logo -->
                 <a href="#" class="inline-flex items-center h-6 gap-3">
                     <div>
@@ -60,7 +126,7 @@
                     </div>
                 </a>
                 <!-- Nav Anchors -->
-                <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-espresso/80">
+                <nav class="hidden md:flex items-center md:gap-4 lg:gap-8 font-medium md:text-xs lg:text-sm text-espresso/80">
                     <a href="#story" class="">Our Story</a>
                     <a href="#favorites" class="">Favorites</a>
                     <a href="#experience" class="">Experience</a>
@@ -69,58 +135,93 @@
 
                 <!-- Action Button -->
                 <div class="hidden md:flex items-center gap-4">
-                    <a href="#favorites" class="inline-flex items-center justify-center bg-espresso rounded-full py-2.5 px-5 text-cream font-medium text-sm tracking-wide">Explore the Menu</a>
+                    <a href="#favorites" class="inline-flex items-center justify-center bg-espresso rounded-full py-2.5 px-5 text-cream font-medium md:text-xs lg:text-sm tracking-wide">Explore the Menu</a>
+                </div>
+                
+                <div class="md:hidden bg-cream-soft border border-warm-outline rounded-lg">
+                    <button id="menu-btn" onclick="toggleMenu()" class="p-2" aria-label="Toggle navigation">
+                        <svg class="w-5 h-5 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu" class="md:hidden absolute top-full left-0 right-0 z-50 bg-cream-surface border-warm-outline shadow-lg transition-all duration-300 ease-in-out max-h-0 opacity-0 -translate-y-2 pointer-events-none overflow-hidden invisible border-b-0">
+                <div class="p-6 space-y-4">
+                    <nav class="flex flex-col space-y-3 text-base font-medium">
+                        <a href="#story" onclick="toggleMenu()" class="py-2 border-b border-warm-outline/40 flex items-center justify-between">
+                            <span>Our Story</span>
+                            <span class="text-terracotta text-xs">→</span>
+                        </a>
+                        <a href="#favorites" onclick="toggleMenu()" class="py-2 border-b border-warm-outline/40 flex items-center justify-between">
+                            <span>Favorites</span>
+                            <span class="text-terracotta text-xs">→</span>
+                        </a>
+                        <a href="#experience" onclick="toggleMenu()" class="py-2 border-b border-warm-outline/40 flex items-center justify-between">
+                            <span>Experience</span>
+                            <span class="text-terracotta text-xs">→</span>
+                        </a>
+                        <a href="#pickup" onclick="toggleMenu()" class="py-2 border-b border-warm-outline/40 flex items-center justify-between">
+                            <span>Visit &amp; Pickup</span>
+                            <span class="text-terracotta text-xs">→</span>
+                        </a>
+                    </nav>
+                    <a href="#favorites" onclick="toggleMenu()" class="block w-full py-3 text-center rounded-full bg-espresso text-cream text-sm font-medium">
+                        Explore the Menu
+                    </a>
                 </div>
             </div>
         </header>
 
         <main>
             <!-- Hero Section -->
-            <section id="hero" class="relative pt-12 pb-20 overflow-hidden border-b border-warm-outline/40">
+            <section id="hero" class="relative px-5 pt-8 pb-14 md:pt-12 md:pb-20 md:px-[52px] overflow-hidden border-b border-warm-outline/40">
                 <!-- Mint Graphic Background -->
-                <div class="absolute -top-16 -right-16 bg-mint/30 h-96 w-96 rounded-full blur-3xl pointer-events-none -z-10" ></div>
-                <div class="absolute bottom-10 left-10 bg-terracota/10 h-64 w-64 rounded-full blur-2xl pointer-events-none -z-10"></div>
+                <div class="absolute -top-10 -right-10 md:-top-16 md:-right-16 bg-mint/30 w-48 h-48 md:h-96 md:w-96 rounded-full blur-2xl md:blur-3xl pointer-events-none -z-10"></div>
+                <div class="hidden md:block absolute bottom-10 left-10 bg-terracota/10 h-64 w-64 rounded-full blur-2xl pointer-events-none -z-10"></div>
 
                 <div class="container">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-8 items-center">
                         <!-- Text Column -->
-                        <div class="lg:col-span-7">
-                            <div class="inline-flex items-center bg-cream-soft rounded-full border border-warm-outline/80 mb-6 gap-2 px-3.5 py-1.5">
-                                <span class="bg-terracota rounded-full h-2 w-2"></span>
-                                <span class="text-sans text-xs font-espresso/80 font-semibold">NEIGHBORNHOOD SPECIALITY ROASTERY</span>
+                        <div class="contents lg:block lg:col-span-7">
+                            <div class="order-1 inline-flex items-center bg-cream-soft rounded-full border border-warm-outline md:border-warm-outline/80 mb-5 md:mb-6 gap-1.5 md:gap-2 px-3 py-1 md:px-3.5 md:py-1.5 self-start w-fit">
+                                <span class="bg-terracota rounded-full h-1.5 w-1.5 md:h-2 md:w-2"></span>
+                                <span class="text-sans text-[11px] md:text-xs text-espresso/80 font-semibold">NEIGHBORNHOOD SPECIALITY ROASTERY</span>
                             </div>
 
-                            <h1 class="mb-6 font-serif leading-[1.08] text-5xl md:text-6xl lg:text-[70px] text-espresso">
+                            <h1 class="order-2 mb-4 md:mb-6 font-serif leading-[1.12] md:leading-[1.08] text-4xl md:text-6xl lg:text-[70px] text-espresso">
                                 A little warmth in every cup.
                             </h1>
 
-                            <p class="text-lg md:text-xl text-espresso/75 font-normal leading-relaxed mb-8 max-w-xl">Thoughfully brewed specialty coffee, made for slow moments and busy mornings. Roasted in micro-batches with meticulous care and quiet joy.</p>
+                            <p class="order-3 text-base md:text-xl text-espresso/80 md:text-espresso/75 font-normal leading-relaxed mb-6 md:mb-8 max-w-xl">Thoughfully brewed specialty coffee, made for slow moments and busy mornings. Roasted in micro-batches with meticulous care and quiet joy.</p>
 
-                            <div class="flex inline-flex items-center gap-4 mb-10">
-                                <a href="#favorites" class="inline-flex items-center justify-center bg-espresso px-7 py-3.5 text-cream rounded-full text-base">Explore the Menu</a>
-                                <a href="#story" class="inline-flex items-center justify-center border-2 border-espresso/70 px-7 py-3.5 rounded-full text-espresso font-medium text-base">Our Story</a>
+                            <div class="order-4 flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-8 md:mb-10 w-full sm:w-auto">
+                                <a href="#favorites" class="w-full sm:w-auto inline-flex items-center justify-center bg-espresso px-7 py-3.5 text-cream rounded-full text-sm md:text-base font-medium shadow-sm active:scale-[0.98] transition-transform">Explore the Menu</a>
+                                <a href="#story" class="w-full sm:w-auto inline-flex items-center justify-center bg-cream md:bg-transparent border md:border-2 border-espresso/70 px-7 py-3.5 rounded-full text-espresso font-medium text-sm md:text-base active:scale-[0.98] transition-transform">Our Story</a>
                             </div>
 
-                            <div class="w-full max-w-lg pt-6 border-t border-warm-outline/60 grid grid-cols-3">
-                                <div>
-                                    <p class="font-serif text-2xl text-espresso font-medium">100%</p>
-                                    <p class="text-xs text-espresso/70 font-normal mt-0.5">Direct trade beans</p>
+                            <div class="order-6 lg:order-none w-full max-w-lg mt-0 pt-6 border-t border-warm-outline/60 grid grid-cols-3 gap-2 lg:gap-0 text-center lg:text-left">
+                                <div class="p-2 bg-cream-soft/60 rounded-xl lg:p-0 lg:bg-transparent lg:rounded-none">
+                                    <p class="font-serif text-lg lg:text-2xl font-bold lg:font-medium text-espresso">100%</p>
+                                    <p class="text-[10px] lg:text-xs text-espresso/70 font-normal mt-0.5">Direct trade beans</p>
                                 </div>
-                                <div>
-                                    <p class="font-serif text-2xl text-espresso font-medium">72 hr</p>
-                                    <p class="text-xs text-espresso/70 font-normal mt-0.5">Peak freshness roast</p>
+                                <div class="p-2 bg-cream-soft/60 rounded-xl lg:p-0 lg:bg-transparent lg:rounded-none">
+                                    <p class="font-serif text-lg lg:text-2xl font-bold lg:font-medium text-espresso">72 hr</p>
+                                    <p class="text-[10px] lg:text-xs text-espresso/70 font-normal mt-0.5">Peak freshness roast</p>
                                 </div>
-                                <div>
-                                    <p class="font-serif text-2xl text-espresso font-medium">4.9 / 5</p>
-                                    <p class="text-xs text-espresso/70 font-normal mt-0.5">Craft standard</p>
+                                <div class="p-2 bg-cream-soft/60 rounded-xl lg:p-0 lg:bg-transparent lg:rounded-none">
+                                    <p class="font-serif text-lg lg:text-2xl font-bold lg:font-medium text-espresso">4.9 / 5</p>
+                                    <p class="text-[10px] lg:text-xs text-espresso/70 font-normal mt-0.5">Craft standard</p>
                                 </div>
                             </div>
                         </div>
                         <!-- Image Column -->
-                        <div class="lg:col-span-5 relative">
+                        <div class="order-5 lg:order-none lg:col-span-5 relative mt-2 lg:mt-0 mb-8 lg:mb-0">
                             <!-- Shape -->
-                            <div class="absolute -bottom-6 -left-6 w-28 h-28 rounded-2xl bg-mint transform -rotate-6 z-0 flex items-center justify-center shadow-sm">
-                                <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <div class="absolute -bottom-3 -right-3 lg:-bottom-6 lg:-left-6 w-16 h-16 lg:w-28 lg:h-28 rounded-xl lg:rounded-2xl bg-mint transform rotate-6 lg:-rotate-6 -z-10 lg:z-0 flex items-center justify-center shadow-sm">
+                                <svg class="hidden lg:block" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_2_46)">
                                     <path d="M31.2286 14.3052L32.8861 14.131C36.5453 13.7464 39.8283 16.405 40.2129 20.0642C40.5975 23.7234 37.9389 27.0064 34.2797 27.391L32.6222 27.5652" stroke="#302820" stroke-opacity="0.6" stroke-width="2.49994"/>
                                     <path d="M4.70868 17.0926L31.2286 14.3052L32.7965 29.2227C33.1813 32.8843 30.525 36.1647 26.8633 36.5495L13.6034 37.9432C9.94174 38.328 6.66141 35.6717 6.27656 32.0101L4.70868 17.0926V17.0926" stroke="#302820" stroke-opacity="0.6" stroke-width="2.49994"/>
@@ -136,12 +237,12 @@
                                 </svg>
                             </div>
 
-                            <div class="relative z-10 bg-cream-soft border-4 border-cream-surface rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-[1/1.1] shadow-xl">
+                            <div class="relative z-10 bg-cream-soft border-2 lg:border-4 border-cream-surface rounded-2xl overflow-hidden aspect-[4/3] lg:aspect-[1/1.1] shadow-lg lg:shadow-xl">
                                 <img src="assets/images/artisanal.webp" alt="Warm ceramic cup with latte art on a rustic wooden table in soft morning sunlight" class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-gradient-to-t from-espresso/40 via-transparent to-transparent opacity-60"></div>
-                                <div class="absolute bottom-5 right-5 py-2 px-4 bg-cream/95 border border-warm-outline/80 rounded-xl backdrop-blur-sm text-xs">
+                                <div class="absolute bottom-3 left-3 right-3 lg:bottom-5 lg:right-5 lg:left-auto py-1.5 px-3 lg:py-2 lg:px-4 bg-cream/95 border border-warm-outline/80 rounded-lg lg:rounded-xl backdrop-blur-sm text-xs flex justify-between items-center lg:block">
                                     <span class="text-terracota font-semibold">Morning Roast</span>
-                                    <p class="text-espresso font-semibold">Ethiopia Yirgacheffe Natural</p>
+                                    <p class="text-espresso font-medium lg:font-semibold truncate lg:overflow-visible">Ethiopia Yirgacheffe Natural</p>
                                 </div>
                             </div>
                         </div>
@@ -150,102 +251,104 @@
             </section>
 
             <!-- Story Section -->
-            <section id="story" class="bg-cream-soft/60 border-b border-warm-outline/40">
-                <div class="container grid grid-cols-1 lg:grid-cols-12 lg:gap-16 items-center">
+            <section id="story" class="px-5 py-16 md:py-24 md:px-[52px] bg-cream-soft/50 md:bg-cream-soft/60 border-b border-warm-outline/40">
+                <div class="container grid grid-cols-1 lg:grid-cols-12 gap-0 lg:gap-16 items-center">
                     <!-- Image Column -->
-                    <div class="lg:col-span-6 relative gap-8">
-                        <div class="relative rounded-2xl overflow-hidden border border-warm-outline shadow-md bg-cream aspect-[4/3]">
-                            <img src="assets/images/barista.webp" alt="Barista carefully pouring water from gooseneck kettle into ceramic pour-over filter">
+                    <div class="order-2 lg:order-1 lg:col-span-6 relative gap-8 mb-5 lg:mb-0">
+                        <div class="relative rounded-xl lg:rounded-2xl overflow-hidden border border-warm-outline shadow-sm lg:shadow-md bg-cream aspect-[4/3] mb-4 lg:mb-0">
+                            <img src="assets/images/barista.webp" alt="Barista carefully pouring water from gooseneck kettle into ceramic pour-over filter" class="w-full h-full object-cover">
                         </div>                        
-                        <div class="mt-4 flex items-center justify-between text-xs text-espresso/70 px-2 font-mono">
+                        <div class="flex items-center justify-between text-[10px] lg:text-xs text-espresso/60 lg:text-espresso/70 px-1 lg:px-2 font-mono lg:mt-4">
                             <span>FIGURE 01: THE MORNING BLOOM</span>
                             <span>RATIO 1:16 • 93°C</span>
                         </div>
                     </div>
                     <!-- Story Content -->
-                    <div class="lg:col-span-6">
-                        <span class="text-xs uppercase tracking-widest font-semibold text-terracota block mb-3">Our Story</span>
-                        <h2 class="serif-display text-4xl lg:text-5xl leading-tight text-espresso mb-6">
-                            Rooted in craft, shaped by everyday rituals.
-                        </h2>
-                        <div class="space-y-4 text-base md:text-lg text-espresso/80 leading-relaxed font-normal">
+                    <div class="contents lg:block lg:order-2 lg:col-span-6">
+                        <div class="order-1 mb-4 lg:mb-6">
+                            <span class="text-xs uppercase tracking-widest font-semibold text-terracota block mb-2 lg:mb-3">Our Story</span>
+                            <h2 class="serif-display text-3xl lg:text-5xl leading-snug lg:leading-tight text-espresso">
+                                Rooted in craft, shaped by everyday rituals.
+                            </h2>
+                        </div>
+                        <div class="order-3 space-y-3.5 lg:space-y-4 text-sm md:text-base lg:text-lg text-espresso/80 leading-relaxed font-normal">
                             <p>
                             Bruma was conceived around a simple conviction: coffee isn’t just fuel for a to-do list; it’s an invitation to pause, breathe, and savor quiet craftsmanship.
                             </p>
                             <p>
                             From washed high-altitude lots to delicate honey processes, our roasters coax out terroir without aggressive char. We partner directly with smallholder farming communities, ensuring respectful compensation and transparent provenance.
                             </p>
-                            <p class="text-base text-espresso/70 italic border-l-2 border-terracota pl-4 py-1">
+                            <blockquote class="text-xs lg:text-base text-espresso/80 lg:text-espresso/70 italic border-l-2 border-terracota pl-3 lg:pl-4 py-1 bg-cream/60 lg:bg-transparent rounded-r-lg lg:rounded-none">
                             "We measure our success not by the volume of cups poured, but by the stillness we restore to your morning."
-                            </p>
+                            </blockquote>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Favorites Section -->
-            <section id="favorites" class="bg-cream border-b border-warm-outline/40">
+            <section id="favorites" class="px-5 py-16 md:py-24 md:px-[52px] bg-cream border-b border-warm-outline/40">
                 <div class="container">
                     <!-- Title Column -->
-                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+                    <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 md:mb-16 gap-2 md:gap-4">
                         <div>
-                            <span class="font-sans text-xs text-terracota mb-2 traking-widest block">SEASONAL MENU</span>
-                            <h2 class="font-serif text-espresso text-4xl lg:text-5xl">House Favorites</h2>
+                            <span class="font-sans text-xs text-terracota mb-1 md:mb-2 tracking-widest block font-semibold md:font-normal">SEASONAL MENU</span>
+                            <h2 class="serif-display font-serif text-espresso text-3xl md:text-4xl lg:text-5xl mb-2 md:mb-0">House Favorites</h2>
                         </div>
-                        <div class="max-w-md text-sm md:text-base text-espresso/70 font-normal mr-14">
+                        <div class="max-w-md text-xs md:text-base text-espresso/70 font-normal md:mr-14">
                             <p>Carefully tuned profiles highlighting balanced acidity, creamy texture, and natural botanical sweetness.</p>
                         </div>
                     </div>
 
                     <!-- Menu Grid -->
-                    <div class="grid grid-cols-1 grid-cols-3 gap-8">
-                        <article class="warm-card flex flex-col">
-                            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-cream-soft mb-5 border border-warm-outline/40">
-                                <span class="absolute top-3 left-3 rounded-full px-2.5 py-1 bg-cream/90 border border-warm-outline/50 backdrop-blur-sm text-espresso text-[11px] font-semibold tracking-wider">SIGNATURE</span>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                        <article class="warm-card flex flex-col bg-cream-surface rounded-2xl border border-warm-outline p-4 md:p-[22px] shadow-sm">
+                            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-cream-soft mb-3.5 md:mb-5 border border-warm-outline/40">
+                                <span class="absolute top-2.5 left-2.5 md:top-3 md:left-3 rounded-full px-2 py-0.5 md:px-2.5 md:py-1 bg-cream/90 border border-warm-outline/50 backdrop-blur-sm text-espresso text-[10px] md:text-[11px] font-semibold uppercase tracking-wider">SIGNATURE</span>
                                 <img src="assets/images/honey_coffee.webp" alt="Honey Oat Latte in a ribbed glass with layered espresso and honey drizzle" class="w-full h-full object-cover">
                             </div>
-                            <div class="mb-2 flex items-baseline justify-between">
-                                <h3 class="font-serif text-espresso text-2xl font-medium">Honey Oat Latte</h3>
-                                <span class="font-mono text-terracota text-sm font-bold">
+                            <div class="mb-1.5 md:mb-2 flex items-baseline justify-between">
+                                <h3 class="serif-display font-serif text-espresso text-xl md:text-2xl font-semibold md:font-medium">Honey Oat Latte</h3>
+                                <span class="font-mono text-terracota text-xs md:text-sm font-semibold md:font-bold">
                                     $6.25
                                 </span>
                             </div>
-                            <p class="font-sans text-sm text-espresso/75 leading-relaxed mb-6">Slow-pulled double espresso, organic steamed oat milk, wildflower honey reduction, and golden honeycomb crumb.</p>
-                            <div class="pt-4 border-t border-warm-outline/40 flex items-baseline justify-between text-xs">
+                            <p class="font-sans text-xs md:text-sm text-espresso/75 leading-relaxed mb-3 md:mb-6">Slow-pulled double espresso, organic steamed oat milk, wildflower honey reduction, and golden honeycomb crumb.</p>
+                            <div class="pt-2.5 md:pt-4 border-t border-warm-outline/40 flex items-center md:items-baseline justify-between text-[11px] md:text-xs">
                                 <span class="text-espresso/60">Tasting: Toasted Grain | Honeycomb</span>
                                 <span class="text-terracota font-medium">Hot / Iced</span>
                             </div>
                         </article>
-                        <article class="warm-card flex flex-col">
-                            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-cream-soft mb-5 border border-warm-outline/40">
-                                <span class="absolute top-3 left-3 rounded-full px-2.5 py-1 bg-mint/90 border border-warm-outline/50 backdrop-blur-sm text-espresso text-[11px] font-semibold tracking-wider">CHILLED</span>
+                        <article class="warm-card flex flex-col bg-cream-surface rounded-2xl border border-warm-outline p-4 md:p-[22px] shadow-sm">
+                            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-cream-soft mb-3.5 md:mb-5 border border-warm-outline/40">
+                                <span class="absolute top-2.5 left-2.5 md:top-3 md:left-3 rounded-full px-2 py-0.5 md:px-2.5 md:py-1 bg-mint/90 border border-warm-outline/50 backdrop-blur-sm text-espresso text-[10px] md:text-[11px] font-semibold uppercase tracking-wider">CHILLED</span>
                                 <img src="assets/images/iced_coldbrew.webp" alt="Iced Vanilla Cold Brew in fluted glass with cascading sweet cream" class="w-full h-full object-cover">
                             </div>
-                            <div class="mb-2 flex items-baseline justify-between">
-                                <h3 class="font-serif text-espresso text-2xl font-medium">Iced Vanilla Cold Brew</h3>
-                                <span class="font-mono text-terracota text-sm font-bold">
+                            <div class="mb-1.5 md:mb-2 flex items-baseline justify-between">
+                                <h3 class="serif-display font-serif text-espresso text-xl md:text-2xl font-semibold md:font-medium">Iced Vanilla Cold Brew</h3>
+                                <span class="font-mono text-terracota text-xs md:text-sm font-semibold md:font-bold">
                                     $5.85
                                 </span>
                             </div>
-                            <p class="font-sans text-sm text-espresso/75 leading-relaxed mb-6">Twenty-hour steeped single-origin cold brew topped with Madagascar vanilla-bean infused sweet cream cloud.</p>
-                            <div class="pt-4 border-t border-warm-outline/40 flex items-baseline justify-between text-xs">
+                            <p class="font-sans text-xs md:text-sm text-espresso/75 leading-relaxed mb-3 md:mb-6">Twenty-hour steeped single-origin cold brew topped with Madagascar vanilla-bean infused sweet cream cloud.</p>
+                            <div class="pt-2.5 md:pt-4 border-t border-warm-outline/40 flex items-center md:items-baseline justify-between text-[11px] md:text-xs">
                                 <span class="text-espresso/60">Tasting: Dark Cacao | Sweet Cream</span>
                                 <span class="text-terracota font-medium">Iced Only</span>
                             </div>
                         </article>
-                        <article class="warm-card flex flex-col">
-                            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-cream-soft mb-5 border border-warm-outline/40">
-                                <span class="absolute top-3 left-3 rounded-full px-2.5 py-1 bg-cream/90 border border-warm-outline/50 backdrop-blur-sm text-espresso text-[11px] font-semibold tracking-wider">SEASONAL</span>
+                        <article class="warm-card flex flex-col bg-cream-surface rounded-2xl border border-warm-outline p-4 md:p-[22px] shadow-sm">
+                            <div class="relative w-full aspect-square rounded-xl overflow-hidden bg-cream-soft mb-3.5 md:mb-5 border border-warm-outline/40">
+                                <span class="absolute top-2.5 left-2.5 md:top-3 md:left-3 rounded-full px-2 py-0.5 md:px-2.5 md:py-1 bg-cream/90 border border-warm-outline/50 backdrop-blur-sm text-espresso text-[10px] md:text-[11px] font-semibold uppercase tracking-wider">SEASONAL</span>
                                 <img src="assets/images/cinnamon_coffee.webp" alt="Cinnamon Cloud Cappuccino in matte ceramic cup with delicate spice dust" class="w-full h-full object-cover">
                             </div>
-                            <div class="mb-2 flex items-baseline justify-between">
-                                <h3 class="font-serif text-espresso text-2xl font-medium">Cinnamon Cappucino</h3>
-                                <span class="font-mono text-terracota text-sm font-bold">
+                            <div class="mb-1.5 md:mb-2 flex items-baseline justify-between">
+                                <h3 class="serif-display font-serif text-espresso text-xl md:text-2xl font-semibold md:font-medium">Cinnamon Cappucino</h3>
+                                <span class="font-mono text-terracota text-xs md:text-sm font-semibold md:font-bold">
                                     $5.50
                                 </span>
                             </div>
-                            <p class="font-sans text-sm text-espresso/75 leading-relaxed mb-6">Velvety microfoam aerated over rich hazelnut-noted espresso, dusted with fresh stone-ground Ceylon cinnamon.</p>
-                            <div class="pt-4 border-t border-warm-outline/40 flex items-baseline justify-between text-xs">
+                            <p class="font-sans text-xs md:text-sm text-espresso/75 leading-relaxed mb-3 md:mb-6">Velvety microfoam aerated over rich hazelnut-noted espresso, dusted with fresh stone-ground Ceylon cinnamon.</p>
+                            <div class="pt-2.5 md:pt-4 border-t border-warm-outline/40 flex items-center md:items-baseline justify-between text-[11px] md:text-xs">
                                 <span class="text-espresso/60">Tasting: Ceylon Spice | Hazelnut</span>
                                 <span class="text-terracota font-medium">Hot</span>
                             </div>
@@ -255,18 +358,18 @@
             </section>
 
             <!-- Experience Section -->
-            <section id="experience" class="bg-cream-soft/40 border-b border-warm-outline/40">
+            <section id="experience" class="px-5 py-16 md:py-24 md:px-[52px] bg-cream-soft/40 border-b border-warm-outline/40">
                 <div class="container">
-                    <div class="mb-16 text-center max-w-2xl mx-auto">
-                        <span class="text-xs text-terracota tracking-widest mb-2">THE RITUAL</span>
-                        <h2 class="mb-4 text-4xl lg:text-5xl text-espresso font-serif">A space designed for deliberate slowing down.</h2>
-                        <p class="text-base text-espresso/70 leading-relaxed">Every texture, sound, and ceramic cup is calibrated to create a welcoming sensory pause in the neighborhood.</p>
+                    <div class="mb-8 md:mb-16 text-left md:text-center max-w-2xl md:mx-auto">
+                        <span class="text-xs uppercase tracking-widest font-semibold text-terracota block mb-1 md:mb-2">THE RITUAL</span>
+                        <h2 class="serif-display text-3xl md:text-4xl lg:text-5xl text-espresso mb-3 md:mb-4 leading-snug md:leading-tight">A space designed for deliberate slowing down.</h2>
+                        <p class="text-xs md:text-base text-espresso/70 leading-relaxed">Every texture, sound, and ceramic cup is calibrated to create a welcoming sensory pause in the neighborhood.</p>
                     </div>
 
                     <!-- Asymmetric Editorial Grid / Collage -->
-                    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-center">
                         <!-- Feature 1 -->
-                        <div class="hidden md:flex flex-col md:col-span-5 bg-cream border border-warm-outline rounded-2xl p-10 gap-8">
+                        <div class="hidden md:flex flex-col md:col-span-5 bg-cream border border-warm-outline rounded-2xl p-4 md:p-6 lg:p-10 gap-4 lg:gap-8">
                             <div class="pb-8">
                                 <div class="mb-6">
                                     <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -283,22 +386,22 @@
                             </div>
                         </div>
                         <!-- Feature 2 -->
-                        <div class="md:col-span-7 grid grid-cols-2 gap-4">
-                            <div class="rounded-2xl overflow-hidden border border-warm-outline/60 aspect-[3/4] bg-cream shadow-sm">
+                        <div class="md:col-span-7 grid grid-cols-2 gap-3 md:gap-4">
+                            <div class="rounded-xl md:rounded-2xl overflow-hidden border border-warm-outline/60 aspect-[4/5] md:aspect-[3/4] bg-cream shadow-sm">
                                 <img src="assets/images/artisanal.webp" alt="Morning coffee scene with sunlight" class="w-full h-full object-cover">
                             </div>
-                            <div class="flex flex-col gap-4">
-                                <div class="rounded-2xl bg-cream border border-warm-outline/60 overflow-hidden aspect-square shadow-sm">
+                            <div class="contents md:flex md:flex-col md:gap-4">
+                                <div class="rounded-xl md:rounded-2xl bg-cream border border-warm-outline/60 overflow-hidden aspect-[4/5] md:aspect-square shadow-sm">
                                     <img src="assets/images/barista.webp" alt="Artisanal pour over coffee detail" class="w-full h-full object-cover">
                                 </div>
                                 <!-- Brand Statement Block -->
-                                <div class="md:hidden">
-                                    <h3>Tactile stoneware cups</h3>
-                                    <span>Crafted by local ceramicists to retain heat and celebrate authentic clay texture with every sip.</span>
+                                <div class="col-span-2 md:hidden bg-cream p-5 rounded-xl border border-warm-outline">
+                                    <h3 class="serif-display text-lg text-espresso mb-2">Tactile stoneware cups</h3>
+                                    <p class="text-xs text-espresso/75 leading-relaxed">Crafted by local ceramicists to retain heat and celebrate authentic clay texture with every sip.</p>
                                 </div>
-                                <div class="rounded-2xl bg-espresso text-cream p-6 flex flex-col justify-center flex-grow">
-                                    <span class="text-xs uppercase tracking-widest text-mint font-semibold mb-2">Our Promise</span>
-                                    <p class="font-serif text-lg text-cream/95 leading-snug">
+                                <div class="col-span-2 md:col-span-1 rounded-xl md:rounded-2xl bg-espresso text-cream p-5 md:p-6 flex flex-col justify-center flex-grow">
+                                    <span class="text-[10px] md:text-xs uppercase tracking-widest text-mint font-semibold mb-1.5 md:mb-2 block">Our Promise</span>
+                                    <p class="serif-display text-base md:text-lg text-cream/95 leading-snug">
                                         "Zero shortcuts. Real vanilla pods, single-origin roasts, and people who know you by name."
                                     </p>
                                 </div>
@@ -309,27 +412,26 @@
             </section>
 
             <!-- Pickup Section -->
-            <section id="pickup" class="bg-cream border-b border-warm-outline/40">
-                <div class="container relative bg-cream-soft border border-warm-outline rounded-3xl p-16">
+            <section id="pickup" class="px-5 py-16 md:py-24 md:px-[52px] bg-cream border-b border-warm-outline/40">
+                <div class="container relative bg-cream-soft border border-warm-outline rounded-2xl md:rounded-3xl p-6 md:p-16 overflow-hidden">
                     <div>
                         <!-- Mint decorative touch -->
                         <div class="absolute top-0 right-0 bg-mint/20 rounded-full blur-2xl h-64 w-64 pointer-events-none"></div>
                         <div class="max-w-2xl relative z-10">
-                            <span class="text-xs text-terracota tracking-widest mb-3">PICKUP & LOCAL ROASTERY</span>
-                            <h2 class="font-serif text-espresso text-4xl md:text-5xl mb-6">Pick up fresh batches or get beans delivered to your door.</h2>
-                            <p class="text-base md:text-lg text-espresso/75 leading-relaxed mb-8">Bruma operates as a micro-batch roast lab. Order your whole beans 
+                            <span class="text-xs uppercase tracking-widest font-semibold text-terracota block mb-2 md:mb-3">PICKUP & LOCAL ROASTERY</span>
+                            <h2 class="serif-display font-serif text-espresso text-2xl md:text-4xl lg:text-5xl mb-3 md:mb-6 leading-snug md:leading-tight">Pick up fresh batches or get beans delivered to your door.</h2>
+                            <p class="text-xs md:text-base lg:text-lg text-espresso/75 leading-relaxed mb-6 md:mb-8">Bruma operates as a micro-batch roast lab. Order your whole beans 
                                 online for weekly neighborhood drop-offs, or choose counter pickup
                                 during our weekend roasting sessions.
                             </p>
                             <div>
-                                
-                                <div class="flex inline-flex items-center gap-4 mb-5">
-                                    <a href="#favorites" class="inline-flex items-center justify-center bg-espresso px-7 py-3.5 text-cream rounded-full text-base">Explore Our Favorites</a>
-                                <a href="#story" class="inline-flex items-center justify-center border-2 border-espresso/70 px-7 py-3.5 rounded-full text-espresso font-medium text-base">Learn About Our Roasts</a>
+                                <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 mb-3 sm:mb-5">
+                                    <a href="#favorites" class="w-full sm:w-auto block sm:inline-flex text-center justify-center bg-espresso py-3 sm:py-3.5 px-7 rounded-full text-cream text-xs sm:text-base font-medium">Explore Our Favorites</a>
+                                    <a href="#story" class="hidden sm:inline-flex items-center justify-center border-2 border-espresso/70 px-7 py-3.5 rounded-full text-espresso font-medium text-base">Learn About Our Roasts</a>
                                 </div>
                             </div>
-                            <div class="flex inline-flex px-3 py-1.5 gap-2 items-center bg-cream/70 border border-warm-outline/60 rounded-lg mt-8">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <div class="flex items-start sm:items-center gap-2 text-[10px] sm:text-xs text-espresso/60 bg-cream/80 sm:bg-cream/70 border border-warm-outline/60 p-2.5 sm:px-3 sm:py-1.5 rounded-lg mt-3 sm:mt-8 w-fit">
+                                <svg class="w-4 h-4 flex-shrink-0 mt-0.5 sm:mt-0" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_2_205)">
                                     <path d="M1.33333 7.99992C1.33333 11.6794 4.32056 14.6666 8 14.6666C11.6794 14.6666 14.6667 11.6794 14.6667 7.99992C14.6667 4.32049 11.6794 1.33325 8 1.33325C4.32056 1.33325 1.33333 4.32049 1.33333 7.99992V7.99992" stroke="#B78064" stroke-width="1.33333"/>
                                     <path d="M8 10.6667V8" stroke="#B78064" stroke-width="1.33333"/>
@@ -341,7 +443,7 @@
                                     </clipPath>
                                     </defs>
                                 </svg>
-                                <span class="text-xs text-espresso/60">Demonstration concept — Pickup schedule and online checkout are simulated for design-to-code preview.</span>
+                                <span>Demonstration concept — Pickup schedule and online checkout are simulated for design-to-code preview.</span>
                             </div>
                         </div>
                     </div>
@@ -349,27 +451,27 @@
             </section>
         </main>
 
-        <footer class="bg-espresso border-t border-espresso text-cream px-[52px] py-16">
+        <footer class="bg-espresso border-t border-espresso text-cream px-5 py-12 md:px-[52px] md:py-16">
             <div class="container">
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-10">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 md:pb-12">
                     <div class="md:col-span-5">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-8 h-8 rounded-full bg-cream/10 flex items-center justify-center text-mint">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <div class="flex items-center gap-2 md:gap-3 mb-3 md:mb-4">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-cream/10 flex items-center justify-center text-mint">
+                                <svg class="w-3.5 h-3.5 md:w-5 md:h-5" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M10 1.66675C6.66667 5.00008 5 7.50008 5 10.8334C5 13.593 7.24042 15.8334 10 15.8334C12.7596 15.8334 15 13.593 15 10.8334C15 7.50008 13.3333 5.00008 10 1.66675Z" fill="#B8EECB"/>
                                     <path d="M10 1.66675C6.66667 5.00008 5 7.50008 5 10.8334C5 13.593 7.24042 15.8334 10 15.8334C12.7596 15.8334 15 13.593 15 10.8334C15 7.50008 13.3333 5.00008 10 1.66675V1.66675" stroke="#B8EECB" stroke-width="1.66667"/>
                                 </svg>
                             </div>
-                            <span class="font-serif text-2xl font-bold tracking-tight text-cream">Bruma Coffee</span>
+                            <span class="serif-display font-serif text-lg md:text-2xl font-bold tracking-tight text-cream">Bruma Coffee</span>
                         </div>
-                        <p class="text-sm text-cream/70 max-w-sm leading-relaxed mb-6">
+                        <p class="text-xs md:text-sm text-cream/70 max-w-sm leading-relaxed mb-4 md:mb-6">
                             A fictional specialty coffee roastery celebrating tactile craftsmanship, slow mornings, and authentic neighborhood connection.
                         </p>
-                        <div class="inline-block px-3 py-1 rounded bg-cream/10 text-xs text-mint font-mono">
+                        <div class="inline-block px-2.5 py-1 md:px-3 rounded bg-cream/10 text-[10px] md:text-xs text-mint font-mono mb-6 md:mb-0">
                             <span>Concept project - not a real business</span>
                         </div>
                     </div>
-                    <div class="md:col-span-3">
+                    <div class="hidden md:block md:col-span-3">
                         <h4 class="text-xs uppercase tracking-widest text-cream/50 font-semibold mb-4">EXPLORE</h4>
                         <ul class="space-y-2.5 text-sm text-cream/80">
                             <li><a href="#story" class="hover:text-mint transition-colors">Our Story</a></li>
@@ -378,18 +480,17 @@
                             <li><a href="#pickup" class="hover:text-mint transition-colors">Visit & Pickup</a></li>
                         </ul>
                     </div>
-                    <div class="md:col-span-4">
+                    <div class="hidden md:block md:col-span-4">
                         <h4 class="text-xs uppercase tracking-widest text-cream/50 font-semibold mb-4">DESIGN PORTFOLIO</h4>
                         <p class="text-xs text-cream/70 leading-relaxed mb-3">
                             Built as a design-to-code portfolio demonstration with semantic
                             HTML, Tailwind CSS, and vanilla JS. Follows design tokens defined
                             in <code class="text-mint font-mono">design.md</code>.
                         </p>
-                        <p class="text-xs text-cream/50 font-mono">Palette: Mint #B8EECB | Terracota #B78064 | Cream #FFF7E4 | Espresso #302820</p>
                     </div>
                 </div>
                 <!-- Bottom Credits -->
-                <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-cream/50 gap-4">
+                <div class="pt-6 md:pt-8 border-t border-cream/10 text-[10px] md:text-xs text-cream/40 md:text-cream/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-4">
                     <p>© 2025 Bruma Coffee. Fictional design concept. All rights reserved.</p>
                     <p>Crafted with care for frontend portfolio presentation.</p>
                 </div>
